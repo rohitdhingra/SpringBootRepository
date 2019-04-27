@@ -1,10 +1,14 @@
 package com.rohit.poc.web.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/spring-mvc-java")
@@ -33,5 +37,23 @@ public class SampleController {
 	@ResponseBody
 	public String getFallback() {
 		return "Fallback for GET Requests";
+	}
+	
+	@RequestMapping(value="/exceptionCheck",method=RequestMethod.POST)
+	@ResponseBody
+	public String exceptionCheck(@RequestParam("id") String id )
+	{
+		if(id.equals("123"))
+		{
+			throw new IllegalArgumentException();
+		}
+		return "Get some Foos with headers"+id;
+	}
+	
+	@ExceptionHandler(IllegalArgumentException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public void onIllegalArgumentException(IllegalArgumentException exception)
+	{
+		
 	}
 }

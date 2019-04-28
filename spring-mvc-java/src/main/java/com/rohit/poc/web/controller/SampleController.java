@@ -1,6 +1,12 @@
 package com.rohit.poc.web.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,10 +56,47 @@ public class SampleController {
 		return "Get some Foos with headers"+id;
 	}
 	
-	@ExceptionHandler(IllegalArgumentException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public void onIllegalArgumentException(IllegalArgumentException exception)
-	{
+//	@ExceptionHandler(IllegalArgumentException.class)
+//	@ResponseStatus(code=HttpStatus.BAD_REQUEST, reason="Some Parameters are invalid")
+//	public void onIllegalArgumentException(IllegalArgumentException exception)
+//	{
+//		
+//	}
+	@GetMapping("/hello")
+	ResponseEntity<String> hello(){
+//		return new ResponseEntity<>("Hello World!",HttpStatus.OK);
+		return ResponseEntity.ok("Hello World 2!!");
 		
+	}
+	
+	
+	@GetMapping("/age")
+	ResponseEntity<String> age(@RequestParam(name="yearOfBirth",required=false) int yearOfBirth )
+	{
+		if(yearOfBirth>2019)
+		{
+			return ResponseEntity.badRequest().body("Year of Birth cannot be future date22");
+//			return new ResponseEntity<>("Year of Birth cannot be future date",HttpStatus.BAD_REQUEST);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("Year of Birth 222is "+yearOfBirth);
+//		return new ResponseEntity<>("Year of Birth is"+yearOfBirth,HttpStatus.OK);
+	}
+	
+	@GetMapping("/customHeader")
+	ResponseEntity<String> customHeader()
+	{
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Custom-Header", "fooo");
+		return ResponseEntity.ok().header("Custom-Header", "fooo232223").body("Custom Header Set22");
+//		return new ResponseEntity<>("Custom Header Set",headers,HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/manual")
+	void manual(HttpServletResponse response) throws IOException
+	{
+		response.setHeader("Custom-Header", "foo");
+		response.setStatus(200);
+		response.getWriter().println("Hello World!!");
 	}
 }

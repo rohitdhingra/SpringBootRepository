@@ -14,7 +14,6 @@ public class AppInitializer implements WebApplicationInitializer{
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		// TODO Auto-generated method stub
 		AnnotationConfigWebApplicationContext root= new AnnotationConfigWebApplicationContext();
 		root.scan("com.rohit.poc.web");
 		

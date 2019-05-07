@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>Enter Account Details</h1>
-	<form:form modelAttribute="aNewAccount">
+	<form:form modelAttribute="aNewAccount" >
 		<table>
 			<tr>
 				<td>First Name: <form:input type="text" name="firstName"

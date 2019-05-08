@@ -30,7 +30,7 @@ public class MyDemoController {
 		return "quote";
 	}
 	
-	@RequestMapping(value="createAccount")
+	@RequestMapping(value="/createAccount")
 	public String createAccount(@Valid @ModelAttribute("aNewAccount") Account account,BindingResult result)
 	{
 		
@@ -44,10 +44,24 @@ public class MyDemoController {
 		return "createAccount";
 	}
 	
+	@RequestMapping(value="/doCreate")
+	public String doCreate(@ModelAttribute("aNewAccount") Account account)
+	{
+		System.out.println("New Account Info:::::"+account);
+		return "redirect:accConfirm";
+	}
+	
+	@RequestMapping(value="/accConfirm")
+	public String accountConfirmation(@ModelAttribute("aNewAccount") Account account)
+	{
+		System.out.println("New Account Info:::::"+account);
+		return "accountConfirmed";
+	}
+	
 	@RequestMapping(value="/accountCreated")
 	public String performCreate(Account account)
 	{
-		System.out.println(account);
+		System.out.println("New Account Info:::::"+account);
 		return "accountCreated";
 	}
 	

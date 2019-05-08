@@ -29,6 +29,12 @@ public class MyDemoController {
 		model.addAttribute("randomQuote",randomQuote);
 		return "quote";
 	}
+	@ModelAttribute
+	public void setUserDetails(@RequestParam("userName") String userName,Model model)
+	{
+		model.addAttribute("userName",userName);
+		model.addAttribute("userRole", "Technical Lead");
+	}
 	
 	@RequestMapping(value="/createAccount")
 	public String createAccount(@Valid @ModelAttribute("aNewAccount") Account account,BindingResult result)

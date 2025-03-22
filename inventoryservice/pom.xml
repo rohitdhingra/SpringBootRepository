@@ -55,6 +55,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -73,6 +74,7 @@
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 
 		<!-- Testcontainers for PostgreSQL (or another database) -->
 		<dependency>
@@ -121,6 +123,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
 			<!-- Maven Surefire Plugin for running unit tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -148,6 +151,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 
